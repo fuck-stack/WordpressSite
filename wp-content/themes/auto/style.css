@@ -1,0 +1,15 @@
+/*
+Theme Name: auto
+*/
+body{
+    background-color: red;
+    padding: 0;
+}
+.entry-meta,
+.post-date,
+.entry-footer {
+    display: none;
+}
+.page-template-home .card-body {
+    padding: 0 !important;  /* убираем все внутренние отступы */
+}

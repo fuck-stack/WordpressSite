@@ -1,0 +1,163 @@
+/* ===== Подключение шрифта ===== */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+/* ===== Переменные ===== */
+.speedyui {
+    --su-primary-color: #ed3364;
+    --su-nav-link-color:var(--bs-white);
+    font-family: "Poppins", sans-serif;
+}
+
+/* ===== Стили меню ===== */
+
+/* 1. Фон панели */
+.nav-bg {
+  background-color: #c7c7c7 !important;
+}
+
+/* 2. Логотип */
+.logo-wrapper img {
+  max-height: 50px;
+  width: auto;
+}
+
+/* 3. Пункты меню (используем класс .menu-item, который генерирует WordPress) */
+.speedyui-header ul.navbar-nav li.menu-item {
+  margin: 0 1.25rem;
+}
+
+@media (min-width: 1200px) {
+  .speedyui-header ul.navbar-nav li.menu-item {
+    margin: 0 1.85rem;
+  }
+}
+
+/* 4. Ссылки внутри пунктов */
+.speedyui-header ul.navbar-nav li.menu-item a {
+  color: var(--su-nav-link-color);
+  padding: 0.75rem 0;
+  font-size: 0.9rem;
+  font-weight: 500;
+  position: relative;
+  transition: all 0.3s;
+  text-decoration: none;
+  display: inline-block;
+}
+
+/* Активная страница (WordPress добавляет класс .current-menu-item) */
+.speedyui-header ul.navbar-nav li.current-menu-item a,
+.speedyui-header ul.navbar-nav li.current-page-item a {
+  color: var(--su-primary-color);
+}
+
+/* Наведение */
+.speedyui-header ul.navbar-nav li.menu-item a:hover {
+  color: var(--su-primary-color);
+}
+
+/* Первый и последний пункт – убираем лишние отступы */
+.speedyui-header ul.navbar-nav li.menu-item:first-of-type {
+  margin-left: 0;
+}
+.speedyui-header ul.navbar-nav li.menu-item:last-of-type {
+  margin-right: 0;
+}
+
+/* 5. Центрирование меню */
+.speedyui-header .navbar-collapse {
+  flex-grow: 1;
+  justify-content: center;
+}
+
+/* ===== Выпадающие списки (подменю) ===== */
+/* WordPress добавляет класс .menu-item-has-children к родительскому пункту */
+
+.speedyui-header ul.navbar-nav .sub-menu { /* WordPress использует .sub-menu для вложенного списка */
+  background-color: #1a1a1a;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.5rem 0;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  display: block;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+  min-width: 12em;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  list-style: none;
+  margin: 0;
+}
+
+.speedyui-header ul.navbar-nav li.menu-item-has-children:hover > .sub-menu {
+  opacity: 1;
+  visibility: visible;
+  top: 100% !important;
+}
+
+/* Элементы внутри подменю (WordPress даёт им класс .menu-item, но они вложены) */
+.speedyui-header ul.navbar-nav .sub-menu li.menu-item {
+  margin: 0 !important;
+}
+
+.speedyui-header ul.navbar-nav .sub-menu a {
+  padding: 0.35rem 1.5rem !important;
+  transition: background 0.15s, padding-left 0.15s;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.7);
+  display: block;
+}
+
+.speedyui-header ul.navbar-nav .sub-menu a:hover {
+  background-color: rgba(255,255,255,0.08);
+  color: var(--su-primary-color);
+  padding-left: 2rem !important;
+}
+
+/* Стрелка у пунктов с подменю (используем псевдоэлемент) */
+.speedyui-header ul.navbar-nav li.menu-item-has-children > a::after {
+  content: "";
+  border-color: currentColor;
+  box-sizing: border-box;
+  height: 0.4em;
+  width: 0.4em;
+  border-style: solid;
+  border-width: 0 1px 1px 0;
+  transform: rotate(45deg);
+  transition: all 0.3s;
+  margin-left: 0.355em;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* ===== Адаптив для мобильных ===== */
+@media (max-width: 991.98px) {
+  .speedyui-header ul.navbar-nav li.menu-item {
+    margin: 0 !important;
+  }
+  .speedyui-header ul.navbar-nav li.menu-item a {
+    padding: 0.5rem 0.75rem !important;
+  }
+  .speedyui-header .navbar-collapse {
+    flex-direction: column;
+    align-items: stretch;
+    margin-top: 0.5rem;
+  }
+  .speedyui-header ul.navbar-nav .sub-menu {
+    position: static !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    box-shadow: none !important;
+    background: rgba(255,255,255,0.05) !important;
+    border-radius: 0 !important;
+    margin-top: 0 !important;
+    padding-left: 1rem !important;
+    display: none; /* скрываем по умолчанию, можно показывать через toggle */
+  }
+  .speedyui-header ul.navbar-nav li.menu-item-has-children:hover > .sub-menu {
+    top: auto !important;
+    display: block; /* показываем при клике, но для этого нужен JS, лучше использовать collapse */
+  }
+}
